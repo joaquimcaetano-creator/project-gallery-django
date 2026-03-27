@@ -1,0 +1,13 @@
+{% extends 'mostra/base.html' %}
+
+{% block title %}Início - Mostra Virtual{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border text-center">
+    <h1 class="display-5 fw-bold text-primary">Bem-vindo à Mostra Virtual</h1>
+    <p class="fs-4">Plataforma oficial para os trabalhos acadêmicos da UFJ.</p>
+    <hr class="my-4">
+    <p>Explore as produções e conheça os detalhes de cada iniciativa.</p>
+    <a href="{% url 'projetos' %}" class="btn btn-primary btn-lg px-4">Ver Projetos</a>
+</div>
+{% endblock %}

@@ -1,14 +1,18 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
+# Página Inicial
 def home(request):
-    return HttpResponse("<h1>Página Inicial da Mostra</h1><p>Bem-vindo ao portal!</p>")
+    return render(request, 'mostra/home.html')
 
+# Lista de Projetos (vai ler o arquivo projetos.html)
 def projetos(request):
-    return HttpResponse("<h1>Lista de Projetos</h1><p>Aqui aparecerão os trabalhos acadêmicos.</p>")
+    return render(request, 'mostra/projetos.html')
 
+# Detalhes de um Projeto (por enquanto continua simples, pois precisa do banco de dados)
 def detalhe(request, id):
-    return HttpResponse(f"<h1>Detalhes do Projeto {id}</h1><p>Informações específicas do projeto.</p>")
+    # Usamos f-string para passar o ID para o template no futuro
+    return render(request, 'mostra/detalhe.html', {'id': id})
 
+# Página Sobre a Mostra (vai ler o arquivo sobre.html)
 def sobre(request):
-    return HttpResponse("<h1>Sobre a Mostra Virtual</h1><p>Projeto desenvolvido para a UFJ.</p>")
+    return render(request, 'mostra/sobre.html')
