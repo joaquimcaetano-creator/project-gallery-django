@@ -4,9 +4,11 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'mostra/home.html')
 
-# Lista de Projetos (vai ler o arquivo projetos.html)
+from .models import Projeto # Importe o modelo no topo
+
 def projetos(request):
-    return render(request, 'mostra/projetos.html')
+    lista_projetos = Projeto.objects.all() # Busca todos os projetos do banco
+    return render(request, 'mostra/projetos.html', {'projetos': lista_projetos})
 
 # Detalhes de um Projeto (por enquanto continua simples, pois precisa do banco de dados)
 def detalhe(request, id):

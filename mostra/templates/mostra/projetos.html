@@ -3,16 +3,24 @@
 {% block title %}Projetos - Mostra Virtual{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Lista de Projetos</h1>
+<h1 class="mb-4">Projetos Cadastrados</h1>
+
 <div class="row">
-    <div class="col-md-4">
-        <div class="card shadow-sm">
+    {% for p in projetos %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
             <div class="card-body">
-                <h5 class="card-title">Projeto Exemplo</h5>
-                <p class="card-text">Em breve, os projetos do banco de dados aparecerão aqui.</p>
-                <a href="#" class="btn btn-outline-primary">Ver mais</a>
+                <h5 class="card-title text-primary">{{ p.titulo }}</h5>
+                <p class="card-text text-muted">{{ p.resumo|truncatewords:20 }}</p>
+                <p class="small"><strong>Autor:</strong> {{ p.autor }}</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+                <a href="#" class="btn btn-primary w-100">Ver Detalhes</a>
             </div>
         </div>
     </div>
+    {% empty %}
+    <p>Nenhum projeto cadastrado ainda.</p>
+    {% endfor %}
 </div>
 {% endblock %}
