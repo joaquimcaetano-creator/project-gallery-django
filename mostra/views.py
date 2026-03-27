@@ -10,10 +10,15 @@ def projetos(request):
     lista_projetos = Projeto.objects.all() # Busca todos os projetos do banco
     return render(request, 'mostra/projetos.html', {'projetos': lista_projetos})
 
-# Detalhes de um Projeto (por enquanto continua simples, pois precisa do banco de dados)
+from django.shortcuts import render, get_object_or_404 # Adicione o get_object_or_404
+
+
+# ... as outras views continuam iguais ...
+
 def detalhe(request, id):
-    # Usamos f-string para passar o ID para o template no futuro
-    return render(request, 'mostra/detalhe.html', {'id': id})
+    # Isso busca o projeto pelo ID ou mostra uma página de erro 404 se não existir
+    projeto = get_object_or_404(Projeto, pk=id)
+    return render(request, 'mostra/detalhe.html', {'projeto': projeto})
 
 # Página Sobre a Mostra (vai ler o arquivo sobre.html)
 def sobre(request):
