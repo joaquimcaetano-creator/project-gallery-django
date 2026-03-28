@@ -11,4 +11,8 @@ urlpatterns = [
     
     # Detalhes do Projeto (ID dinâmico)
     path('projeto/<int:id>/', views.detalhe, name='detalhe'),
+
+path('pesquisa/<int:id>/', views.detalhe_pesquisa, name='detalhe_pesquisa'),
+
+
 ]

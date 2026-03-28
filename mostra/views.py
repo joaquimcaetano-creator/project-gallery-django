@@ -26,10 +26,15 @@ def detalhe(request, id):
     projeto = get_object_or_404(Projeto, id=id)
     return render(request, 'mostra/detalhe_projeto.html', {'projeto': projeto})
 
-# --- LINHAS DE PESQUISA (NOVA ABA) ---
+# --- LISTA DE LINHAS DE PESQUISA (CARDS COLORIDOS) ---
 def pesquisas(request):
     linhas = LinhaPesquisa.objects.all()
     return render(request, 'mostra/pesquisas.html', {'linhas': linhas})
+
+# --- DETALHES DE UMA LINHA DE PESQUISA ---
+def detalhe_pesquisa(request, id):
+    linha = get_object_or_404(LinhaPesquisa, id=id)
+    return render(request, 'mostra/detalhe_pesquisa.html', {'linha': linha})
 
 # --- AGENDA DE EVENTOS (FILTRA O QUE AINDA VAI ACONTECER) ---
 def agenda(request):

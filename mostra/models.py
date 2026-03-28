@@ -52,11 +52,33 @@ class Evento(models.Model):
         ordering = ['data_evento']
 
 
-# === CLASSE LINHA DE PESQUISA (CORRIGIDA) ===
+# === CLASSE LINHA DE PESQUISA ===
 class LinhaPesquisa(models.Model):
     titulo = models.CharField(max_length=200, verbose_name="Título da Linha")
-    descricao = models.TextField(verbose_name="Descrição da Linha")
-    cor_card = models.CharField(max_length=20, default="#b8a2e7", help_text="Cor em HEX (ex: #b8a2e7)")
+    descricao = models.TextField(
+        verbose_name="Descrição Curta (Card)", 
+        help_text="Aparece no card colorido da lista"
+    )
+    
+    conteudo_detalhado = models.TextField(
+        verbose_name="Conteúdo Completo", 
+        blank=True, 
+        null=True, 
+        help_text="O texto detalhado que aparecerá na página interna da pesquisa"
+    )
+    
+    situacao = models.CharField(
+        max_length=100, 
+        verbose_name="Situação", 
+        default="Em execução", 
+        help_text="Ex: Em andamento, Concluído, Planejamento"
+    )
+    
+    cor_card = models.CharField(
+        max_length=20, 
+        default="#b8a2e7", 
+        help_text="Cor em HEX (ex: #b8a2e7)"
+    )
 
     def __str__(self):
         return self.titulo
@@ -64,3 +86,36 @@ class LinhaPesquisa(models.Model):
     class Meta:
         verbose_name = "Linha de Pesquisa"
         verbose_name_plural = "Linhas de Pesquisa"
+
+
+# === NOVA CLASSE PARTICIPANTE ===
+class Participante(models.Model):
+    # Relaciona o participante a uma Linha de Pesquisa específica
+    linha = models.ForeignKey(
+        LinhaPesquisa, 
+        on_delete=models.CASCADE, 
+        related_name='participantes',
+        verbose_name="Linha de Pesquisa"
+    )
+    
+    nome = models.CharField(max_length=150, verbose_name="Nome Completo")
+    cargo = models.CharField(
+        max_length=100, 
+        verbose_name="Cargo/Função", 
+        help_text="Ex: Coordenador, Pesquisador, Bolsista"
+    )
+    
+    foto = models.ImageField(
+        upload_to='pesquisadores/fotos/', 
+        null=True, 
+        blank=True, 
+        verbose_name="Foto de Perfil",
+        help_text="Opcional. Se não enviar, um ícone padrão será exibido."
+    )
+
+    def __str__(self):
+        return f"{self.nome} - {self.linha.titulo}"
+
+    class Meta:
+        verbose_name = "Participante"
+        verbose_name_plural = "Participantes"
