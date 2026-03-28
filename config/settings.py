@@ -4,6 +4,7 @@ Django settings for config project.
 
 from pathlib import Path
 import os
+import dj_database_url # <--- IMPORTANTE: Adicionamos essa biblioteca para o banco real
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,12 +59,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database
+# --- BANCO DE DADOS (CONFIGURAÇÃO HÍBRIDA) ---
+# Ele busca a variável DATABASE_URL no Render. Se não achar, usa o SQLite.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+        conn_max_age=600
+    )
 }
 
 # Password validation
@@ -92,7 +94,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "mostra" / "static",
 ]
 
-# AJUSTE AQUI: Modo mais tolerante do WhiteNoise para não dar erro no build
+# Modo mais tolerante do WhiteNoise para não dar erro no build
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Configuração de Media (Imagens e PDFs que você sobe no Admin)
