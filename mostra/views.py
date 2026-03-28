@@ -1,19 +1,18 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Projeto
+from .models import Projeto, Evento  # Adicionei o Evento aqui!
 from django.db.models import Q
+from django.utils import timezone
 
 def home(request):
-    # Esta é a página de boas-vindas que você queria
     return render(request, 'mostra/home.html')
 
 def projetos(request):
-    # Esta é a página que tem os cards e a busca
     termo_busca = request.GET.get('busca')
     if termo_busca:
         lista_projetos = Projeto.objects.filter(
             Q(titulo__icontains=termo_busca) | 
             Q(autor__icontains=termo_busca) |
-            Q(resumo__icontains=termo_busca)
+            Q(resumo_curto__icontains=termo_busca) # Corrigido para resumo_curto
         )
     else:
         lista_projetos = Projeto.objects.all().order_by('-data_cadastro')
@@ -25,4 +24,9 @@ def detalhe(request, id):
     return render(request, 'mostra/detalhe_projeto.html', {'projeto': projeto})
 
 def sobre(request):
-    return render(request, 'mostra/sobre.html') 
+    return render(request, 'mostra/sobre.html')
+
+def agenda(request):
+    # Pega apenas eventos de "agora" para o futuro
+    proximos_eventos = Evento.objects.filter(data_evento__gte=timezone.now()).order_by('data_evento')
+    return render(request, 'mostra/agenda.html', {'eventos': proximos_eventos})

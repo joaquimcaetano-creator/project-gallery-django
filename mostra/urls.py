@@ -7,4 +7,10 @@ urlpatterns = [
     path('sobre/', views.sobre, name='sobre'),
     # Verifique se esta linha abaixo existe:
     path('projeto/<int:id>/', views.detalhe, name='detalhe_projeto'),
+
+# No seu urlpatterns, adicione:
+path('agenda/', views.agenda, name='agenda'),
+
+
+
 ]
