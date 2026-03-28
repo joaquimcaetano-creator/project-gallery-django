@@ -3,92 +3,108 @@
 {% block title %}Projetos - Mostra Virtual{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="display-6 fw-bold text-dark">Projetos Acadêmicos</h1>
-    <span class="badge bg-primary rounded-pill px-3 py-2">{{ projetos|length }} total</span>
-</div>
-
-<div class="card shadow-sm border-0 mb-5">
-    <div class="card-body bg-white rounded-4">
-        <form method="GET" action="{% url 'projetos' %}" class="row g-2">
-            <div class="col-md-10">
-                <input type="text" name="busca" class="form-control form-control-lg border-0 bg-light" 
+<div class="text-center mb-5" data-aos="fade-down">
+    <h1 class="display-4 fw-800 text-dark">Repositório de Projetos</h1>
+    <p class="text-muted lead">Explore as produções científicas e inovações da nossa comunidade acadêmica.</p>
+    
+    <div class="card border-0 shadow-sm rounded-pill mt-4 mx-auto overflow-hidden bg-white" style="max-width: 700px;">
+        <div class="card-body p-1">
+            <form method="GET" action="{% url 'projetos' %}" class="d-flex">
+                <input type="text" name="busca" class="form-control border-0 px-4 shadow-none" 
                        placeholder="Pesquisar por título, autor ou área..." 
                        value="{{ request.GET.busca }}">
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-primary btn-lg w-100 rounded-3" type="submit">
-                    <i class="bi bi-search"></i> Buscar
+                <button class="btn btn-primary rounded-pill px-4 m-1 fw-bold" type="submit">
+                    <i class="bi bi-search me-2"></i> Buscar
                 </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
-<div class="row">
+<div class="row g-4">
     {% for p in projetos %}
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100 border-0 hover-shadow transition">
+    <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter|add:100 }}">
+        <div class="card h-100 border-0 shadow-sm hover-up transition rounded-4 overflow-hidden bg-white">
             
             {% if p.imagem %}
                 <img src="{{ p.imagem.url }}" class="card-img-top" alt="{{ p.titulo }}" style="height: 220px; object-fit: cover;">
             {% else %}
-                <div class="bg-secondary text-white d-flex flex-column align-items-center justify-content-center" style="height: 220px;">
-                    <i class="bi bi-image fs-1 opacity-50"></i>
-                    <span class="small mt-2">Sem imagem disponível</span>
+                <div class="bg-primary-subtle d-flex flex-column align-items-center justify-content-center text-primary" style="height: 220px;">
+                    <i class="bi bi-rocket-takeoff display-4 opacity-50"></i>
+                    <span class="small mt-2 fw-semibold">Sem imagem disponível</span>
                 </div>
             {% endif %}
             
-            <div class="card-body">
-                <div class="mb-2">
+            <div class="card-body p-4 d-flex flex-column">
+                <div class="mb-3">
                     {% if p.area == 'TEC' %}
-                        <span class="badge bg-info text-dark">Tecnologia</span>
+                        <span class="badge rounded-pill bg-info text-dark px-3 py-2 fw-bold">Tecnologia</span>
                     {% elif p.area == 'SAU' %}
-                        <span class="badge bg-success text-white">Saúde</span>
+                        <span class="badge rounded-pill bg-success text-white px-3 py-2 fw-bold">Saúde</span>
                     {% elif p.area == 'EDU' %}
-                        <span class="badge bg-warning text-dark">Educação</span>
+                        <span class="badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold">Educação</span>
                     {% else %}
-                        <span class="badge bg-secondary text-white">Humanas</span>
+                        <span class="badge rounded-pill bg-secondary text-white px-3 py-2 fw-bold">Humanas</span>
                     {% endif %}
                 </div>
 
-                <h5 class="card-title text-primary fw-bold mb-3">{{ p.titulo }}</h5>
+                <h5 class="card-title fw-800 text-dark mb-3">{{ p.titulo }}</h5>
+                <p class="card-text text-muted small flex-grow-1">
+                    {{ p.resumo_curto|truncatewords:18 }}
+                </p>
                 
-                <p class="card-text text-muted mb-4">{{ p.resumo_curto|truncatewords:15 }}</p>
-                
-                <div class="border-top pt-3">
-                    <p class="small mb-1"><strong>👤 Autor:</strong> {{ p.autor }}</p>
-                    <p class="small mb-0"><strong>👨‍🏫 Orientador:</strong> {{ p.orientador }}</p>
+                <div class="border-top pt-3 mt-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="bg-light rounded-circle p-2 me-2">
+                            <i class="bi bi-person text-primary"></i>
+                        </div>
+                        <span class="small text-dark"><strong>Autor:</strong> {{ p.autor }}</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-light rounded-circle p-2 me-2">
+                            <i class="bi bi-mortarboard text-primary"></i>
+                        </div>
+                        <span class="small text-dark"><strong>Orientador:</strong> {{ p.orientador }}</span>
+                    </div>
+                    
+                    <a href="{% url 'detalhe' p.id %}" class="btn btn-outline-primary w-100 rounded-pill fw-bold py-2">
+                        Ver detalhes <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
                 </div>
-            </div>
-
-            <div class="card-footer bg-white border-top-0 pb-3">
-                <a href="{% url 'detalhe_projeto' p.id %}" class="btn btn-outline-primary w-100 fw-bold rounded-pill">
-                    Ver Detalhes do Projeto
-                </a>
             </div>
         </div>
     </div>
-    
     {% empty %}
-    <div class="col-12 text-center py-5">
-        <div class="alert alert-light border shadow-sm py-5">
-            <i class="bi bi-search display-1 text-muted opacity-25 mb-3"></i>
-            <h4 class="text-muted">Ops! Nenhum projeto encontrado.</h4>
-            <p>Tente buscar por termos diferentes ou <a href="{% url 'projetos' %}" class="fw-bold">limpar a busca</a>.</p>
+    <div class="col-12 text-center py-5" data-aos="fade-up">
+        <div class="py-5">
+            <i class="bi bi-search display-1 text-muted opacity-25 mb-4"></i>
+            <h3 class="text-dark fw-bold">Nenhum projeto encontrado.</h3>
+            <p class="text-muted">Tente buscar por termos diferentes ou limpe os filtros.</p>
+            <a href="{% url 'projetos' %}" class="btn btn-primary rounded-pill px-4 mt-3">Ver todos os projetos</a>
         </div>
     </div>
     {% endfor %}
 </div>
 
 <style>
-    .hover-shadow {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Tipografia Extra */
+    .fw-800 { font-weight: 800; }
+    
+    /* Efeito de Elevação dos Cards */
+    .hover-up { 
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
     }
-    .hover-shadow:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+    .hover-up:hover { 
+        transform: translateY(-12px); 
+        box-shadow: 0 20px 40px rgba(0,0,0,0.12) !important; 
+    }
+
+    /* Cores de fundo suaves para imagens vazias */
+    .bg-primary-subtle { background-color: #eef2ff !important; }
+    
+    /* Input de busca */
+    .form-control:focus {
+        background-color: #fff;
     }
 </style>
-
 {% endblock %}

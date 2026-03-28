@@ -1,5 +1,6 @@
 from django.db import models
 
+# === CLASSE PROJETO ===
 class Projeto(models.Model):
     AREAS_CHOICES = [
         ('TEC', 'Tecnologia'),
@@ -27,7 +28,8 @@ class Projeto(models.Model):
     def __str__(self):
         return self.titulo
 
-# === CLASSE EVENTO (AGORA FORA DO PROJETO) ===
+
+# === CLASSE EVENTO ===
 class Evento(models.Model):
     titulo = models.CharField(max_length=200, verbose_name="Título do Evento")
     descricao = models.TextField(verbose_name="Descrição")
@@ -42,10 +44,23 @@ class Evento(models.Model):
     categoria = models.CharField(max_length=10, choices=CATEGORIAS, default='LIVE')
 
     def __str__(self):
-        # Aqui mudei um detalhe: o strftime pode dar erro se não formatar direto
-        return f"{self.titulo}"
+        return self.titulo
 
     class Meta:
         verbose_name = "Evento"
         verbose_name_plural = "Eventos"
         ordering = ['data_evento']
+
+
+# === CLASSE LINHA DE PESQUISA (CORRIGIDA) ===
+class LinhaPesquisa(models.Model):
+    titulo = models.CharField(max_length=200, verbose_name="Título da Linha")
+    descricao = models.TextField(verbose_name="Descrição da Linha")
+    cor_card = models.CharField(max_length=20, default="#b8a2e7", help_text="Cor em HEX (ex: #b8a2e7)")
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        verbose_name = "Linha de Pesquisa"
+        verbose_name_plural = "Linhas de Pesquisa"
