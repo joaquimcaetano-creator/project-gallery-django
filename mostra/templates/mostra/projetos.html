@@ -5,19 +5,21 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="display-6 fw-bold text-dark">Projetos Acadêmicos</h1>
-    <span class="badge bg-primary rounded-pill">{{ projetos|length }} total</span>
+    <span class="badge bg-primary rounded-pill px-3 py-2">{{ projetos|length }} total</span>
 </div>
 
 <div class="card shadow-sm border-0 mb-5">
-    <div class="card-body bg-white rounded">
+    <div class="card-body bg-white rounded-4">
         <form method="GET" action="{% url 'projetos' %}" class="row g-2">
             <div class="col-md-10">
                 <input type="text" name="busca" class="form-control form-control-lg border-0 bg-light" 
-                       placeholder="Pesquisar por título, autor ou palavra-chave..." 
+                       placeholder="Pesquisar por título, autor ou área..." 
                        value="{{ request.GET.busca }}">
             </div>
             <div class="col-md-2">
-                <button class="btn btn-primary btn-lg w-100" type="submit">Buscar</button>
+                <button class="btn btn-primary btn-lg w-100 rounded-3" type="submit">
+                    <i class="bi bi-search"></i> Buscar
+                </button>
             </div>
         </form>
     </div>
@@ -26,31 +28,33 @@
 <div class="row">
     {% for p in projetos %}
     <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100 border-0">
+        <div class="card shadow-sm h-100 border-0 hover-shadow transition">
             
             {% if p.imagem %}
                 <img src="{{ p.imagem.url }}" class="card-img-top" alt="{{ p.titulo }}" style="height: 220px; object-fit: cover;">
             {% else %}
-                <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 220px;">
-                    <span class="small">Sem imagem</span>
+                <div class="bg-secondary text-white d-flex flex-column align-items-center justify-content-center" style="height: 220px;">
+                    <i class="bi bi-image fs-1 opacity-50"></i>
+                    <span class="small mt-2">Sem imagem disponível</span>
                 </div>
             {% endif %}
             
             <div class="card-body">
                 <div class="mb-2">
                     {% if p.area == 'TEC' %}
-                        <span class="badge badge-tec">Tecnologia</span>
+                        <span class="badge bg-info text-dark">Tecnologia</span>
                     {% elif p.area == 'SAU' %}
-                        <span class="badge badge-sau">Saúde</span>
+                        <span class="badge bg-success text-white">Saúde</span>
                     {% elif p.area == 'EDU' %}
-                        <span class="badge badge-edu">Educação</span>
+                        <span class="badge bg-warning text-dark">Educação</span>
                     {% else %}
-                        <span class="badge badge-hum">Humanas</span>
+                        <span class="badge bg-secondary text-white">Humanas</span>
                     {% endif %}
                 </div>
 
                 <h5 class="card-title text-primary fw-bold mb-3">{{ p.titulo }}</h5>
-                <p class="card-text text-muted mb-4">{{ p.resumo|truncatewords:15 }}</p>
+                
+                <p class="card-text text-muted mb-4">{{ p.resumo_curto|truncatewords:15 }}</p>
                 
                 <div class="border-top pt-3">
                     <p class="small mb-1"><strong>👤 Autor:</strong> {{ p.autor }}</p>
@@ -59,16 +63,32 @@
             </div>
 
             <div class="card-footer bg-white border-top-0 pb-3">
-                <a href="{% url 'detalhe' p.id %}" class="btn btn-outline-primary w-100 fw-bold">
-                    Ver Detalhes
+                <a href="{% url 'detalhe_projeto' p.id %}" class="btn btn-outline-primary w-100 fw-bold rounded-pill">
+                    Ver Detalhes do Projeto
                 </a>
             </div>
         </div>
     </div>
+    
     {% empty %}
     <div class="col-12 text-center py-5">
-        <p class="text-muted">Nenhum projeto encontrado para esta busca.</p>
+        <div class="alert alert-light border shadow-sm py-5">
+            <i class="bi bi-search display-1 text-muted opacity-25 mb-3"></i>
+            <h4 class="text-muted">Ops! Nenhum projeto encontrado.</h4>
+            <p>Tente buscar por termos diferentes ou <a href="{% url 'projetos' %}" class="fw-bold">limpar a busca</a>.</p>
+        </div>
     </div>
     {% endfor %}
 </div>
+
+<style>
+    .hover-shadow {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+    }
+</style>
+
 {% endblock %}

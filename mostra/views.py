@@ -22,7 +22,7 @@ def projetos(request):
 
 def detalhe(request, id):
     projeto = get_object_or_404(Projeto, id=id)
-    return render(request, 'mostra/detalhe.html', {'projeto': projeto})
+    return render(request, 'mostra/detalhe_projeto.html', {'projeto': projeto})
 
 def sobre(request):
     return render(request, 'mostra/sobre.html') 

@@ -9,32 +9,56 @@
             <p class="lead text-muted mb-5 px-md-5">
                 Explore a criatividade acadêmica em uma plataforma projetada para dar vida às ideias da nossa comunidade.
             </p>
-            <a href="{% url 'projetos' %}" class="btn-main shadow-lg">Começar Exploração</a>
+            <a href="{% url 'projetos' %}" class="btn-main shadow-lg text-decoration-none">Começar Exploração</a>
         </div>
     </div>
 </div>
 
-<div class="row g-4">
-    <div class="col-md-6">
-        <div class="card p-5 h-100 bg-tech-card text-white">
-            <h3 class="fw-bold mb-3">Nossa Missão</h3>
-            <p class="opacity-75">Conectar pesquisadores, alunos e a comunidade externa através da transparência e inovação digital.</p>
-            <i class="bi bi-cpu display-1 opacity-25 text-end d-block"></i>
+<div class="container my-5 pb-5">
+    <div class="row g-4 justify-content-center">
+        
+        <div class="col-md-6">
+            <a href="{% url 'projetos' %}" class="text-decoration-none">
+                <div class="p-5 bg-white rounded-5 shadow-sm border h-100 text-center custom-card-hover">
+                    <div class="icon-circle bg-primary-light mb-4 mx-auto">
+                        <i class="bi bi-book-half display-4 text-primary"></i>
+                    </div>
+                    <h3 class="fw-bold text-dark">Repositório Digital</h3>
+                    <p class="text-muted">Acesse o acervo completo de artigos, PDFs e banners das pesquisas acadêmicas.</p>
+                    <span class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold">Explorar Biblioteca</span>
+                </div>
+            </a>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card p-4 mb-3 border-start border-primary border-5">
-            <h5 class="fw-bold"><i class="bi bi-check2-circle me-2"></i> Busca Inteligente</h5>
-            <p class="small text-muted mb-0">Filtre projetos por autor, tema ou orientador instantaneamente.</p>
+
+        <div class="col-md-6">
+            <a href="#" class="text-decoration-none">
+                <div class="p-5 bg-white rounded-5 shadow-sm border h-100 text-center custom-card-hover">
+                    <div class="icon-circle bg-success-light mb-4 mx-auto">
+                        <i class="bi bi-calendar-event display-4 text-success"></i>
+                    </div>
+                    <h3 class="fw-bold text-dark">Agenda de Webinários</h3>
+                    <p class="text-muted">Fique por dentro das datas de lives, defesas e eventos científicos da UFJ.</p>
+                    <span class="btn btn-outline-success rounded-pill px-4 mt-2 fw-bold">Ver Calendário</span>
+                </div>
+            </a>
         </div>
-        <div class="card p-4 mb-3 border-start border-info border-5">
-            <h5 class="fw-bold"><i class="bi bi-lightning-charge me-2"></i> Design Responsivo</h5>
-            <p class="small text-muted mb-0">Acesse de qualquer dispositivo com a mesma qualidade visual.</p>
-        </div>
-        <div class="card p-4 border-start border-success border-5">
-            <h5 class="fw-bold"><i class="bi bi-shield-check me-2"></i> Curadoria Acadêmica</h5>
-            <p class="small text-muted mb-0">Projetos validados pelo corpo docente da UFJ.</p>
-        </div>
+
     </div>
 </div>
+
+<style>
+    .bg-primary-light { background-color: rgba(13, 110, 253, 0.1); width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+    .bg-success-light { background-color: rgba(25, 135, 84, 0.1); width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+    
+    .custom-card-hover {
+        transition: all 0.4s ease;
+        border: 1px solid #eee !important;
+    }
+
+    .custom-card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+        border-color: #0284c7 !important;
+    }
+</style>
 {% endblock %}
