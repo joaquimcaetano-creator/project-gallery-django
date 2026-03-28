@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # Corrigido: era admin.site.urls, eu tinha digitado errado
     path('admin/', admin.site.urls),
-    path('', include('mostra.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Isso libera as fotos
+    path('', include('mostra.urls')), 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,25 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Projeto
+from django.db.models import Q
 
-# Página Inicial
 def home(request):
+    # Esta é a página de boas-vindas que você queria
     return render(request, 'mostra/home.html')
 
-from .models import Projeto # Importe o modelo no topo
-
 def projetos(request):
-    lista_projetos = Projeto.objects.all() # Busca todos os projetos do banco
+    # Esta é a página que tem os cards e a busca
+    termo_busca = request.GET.get('busca')
+    if termo_busca:
+        lista_projetos = Projeto.objects.filter(
+            Q(titulo__icontains=termo_busca) | 
+            Q(autor__icontains=termo_busca) |
+            Q(resumo__icontains=termo_busca)
+        )
+    else:
+        lista_projetos = Projeto.objects.all().order_by('-data_cadastro')
+        
     return render(request, 'mostra/projetos.html', {'projetos': lista_projetos})
 
-from django.shortcuts import render, get_object_or_404 # Adicione o get_object_or_404
-
-
-# ... as outras views continuam iguais ...
-
 def detalhe(request, id):
-    # Isso busca o projeto pelo ID ou mostra uma página de erro 404 se não existir
-    projeto = get_object_or_404(Projeto, pk=id)
-    return render(request, 'mostra/detalhe.html', {'projeto': projeto})
+    projeto = get_object_or_404(Projeto, id=id)
+    return render(request, 'mostra/detalhe.html', {'p': projeto})
 
-# Página Sobre a Mostra (vai ler o arquivo sobre.html)
 def sobre(request):
     return render(request, 'mostra/sobre.html')

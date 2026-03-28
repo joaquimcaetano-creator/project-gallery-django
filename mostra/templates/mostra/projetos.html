@@ -26,22 +26,27 @@
 <div class="row">
     {% for p in projetos %}
     <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100 border-0 hover-shadow transition">
+        <div class="card shadow-sm h-100 border-0">
             
             {% if p.imagem %}
                 <img src="{{ p.imagem.url }}" class="card-img-top" alt="{{ p.titulo }}" style="height: 220px; object-fit: cover;">
             {% else %}
                 <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 220px;">
-                    <i class="bi bi-image" style="font-size: 2rem;"></i>
-                    <span class="ms-2">Sem imagem disponível</span>
+                    <span class="small">Sem imagem</span>
                 </div>
             {% endif %}
             
             <div class="card-body">
                 <div class="mb-2">
-                    <span class="badge bg-info text-dark uppercase small fw-bold">
-                        {{ p.get_area_display }}
-                    </span>
+                    {% if p.area == 'TEC' %}
+                        <span class="badge badge-tec">Tecnologia</span>
+                    {% elif p.area == 'SAU' %}
+                        <span class="badge badge-sau">Saúde</span>
+                    {% elif p.area == 'EDU' %}
+                        <span class="badge badge-edu">Educação</span>
+                    {% else %}
+                        <span class="badge badge-hum">Humanas</span>
+                    {% endif %}
                 </div>
 
                 <h5 class="card-title text-primary fw-bold mb-3">{{ p.titulo }}</h5>
@@ -55,25 +60,15 @@
 
             <div class="card-footer bg-white border-top-0 pb-3">
                 <a href="{% url 'detalhe' p.id %}" class="btn btn-outline-primary w-100 fw-bold">
-                    Ver Detalhes do Projeto
+                    Ver Detalhes
                 </a>
             </div>
         </div>
     </div>
-    
     {% empty %}
     <div class="col-12 text-center py-5">
-        <div class="alert alert-light border shadow-sm">
-            <h4 class="text-muted">Ops! Nenhum projeto encontrado.</h4>
-            <p>Tente buscar por termos diferentes ou <a href="{% url 'projetos' %}">limpar a busca</a>.</p>
-        </div>
+        <p class="text-muted">Nenhum projeto encontrado para esta busca.</p>
     </div>
     {% endfor %}
 </div>
-
-<style>
-    .transition { transition: transform .2s; }
-    .hover-shadow:hover { transform: translateY(-5px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; }
-</style>
-
 {% endblock %}

@@ -1,13 +1,40 @@
 {% extends 'mostra/base.html' %}
 
-{% block title %}Início - Mostra Virtual{% endblock %}
-
 {% block content %}
-<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border text-center">
-    <h1 class="display-5 fw-bold text-primary">Bem-vindo à Mostra Virtual</h1>
-    <p class="fs-4">Plataforma oficial para os trabalhos acadêmicos da UFJ.</p>
-    <hr class="my-4">
-    <p>Explore as produções e conheça os detalhes de cada iniciativa.</p>
-    <a href="{% url 'projetos' %}" class="btn btn-primary btn-lg px-4">Ver Projetos</a>
+<div class="hero-container text-center mb-5">
+    <div class="row align-items-center">
+        <div class="col-lg-8 mx-auto">
+            <span class="badge bg-light text-primary border px-3 py-2 rounded-pill mb-3 fw-bold">PROJETOS 2026</span>
+            <h1 class="display-2 fw-bold mb-4" style="letter-spacing: -2px;">Mostra Virtual de <br><span class="text-primary">Tecnologia & Ciência</span></h1>
+            <p class="lead text-muted mb-5 px-md-5">
+                Explore a criatividade acadêmica em uma plataforma projetada para dar vida às ideias da nossa comunidade.
+            </p>
+            <a href="{% url 'projetos' %}" class="btn-main shadow-lg">Começar Exploração</a>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card p-5 h-100 bg-tech-card text-white">
+            <h3 class="fw-bold mb-3">Nossa Missão</h3>
+            <p class="opacity-75">Conectar pesquisadores, alunos e a comunidade externa através da transparência e inovação digital.</p>
+            <i class="bi bi-cpu display-1 opacity-25 text-end d-block"></i>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-4 mb-3 border-start border-primary border-5">
+            <h5 class="fw-bold"><i class="bi bi-check2-circle me-2"></i> Busca Inteligente</h5>
+            <p class="small text-muted mb-0">Filtre projetos por autor, tema ou orientador instantaneamente.</p>
+        </div>
+        <div class="card p-4 mb-3 border-start border-info border-5">
+            <h5 class="fw-bold"><i class="bi bi-lightning-charge me-2"></i> Design Responsivo</h5>
+            <p class="small text-muted mb-0">Acesse de qualquer dispositivo com a mesma qualidade visual.</p>
+        </div>
+        <div class="card p-4 border-start border-success border-5">
+            <h5 class="fw-bold"><i class="bi bi-shield-check me-2"></i> Curadoria Acadêmica</h5>
+            <p class="small text-muted mb-0">Projetos validados pelo corpo docente da UFJ.</p>
+        </div>
+    </div>
 </div>
 {% endblock %}
