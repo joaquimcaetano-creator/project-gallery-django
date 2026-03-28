@@ -1,64 +1,116 @@
 {% extends 'mostra/base.html' %}
 
 {% block content %}
-<div class="hero-container text-center mb-5">
-    <div class="row align-items-center">
-        <div class="col-lg-8 mx-auto">
-            <span class="badge bg-light text-primary border px-3 py-2 rounded-pill mb-3 fw-bold">PROJETOS 2026</span>
-            <h1 class="display-2 fw-bold mb-4" style="letter-spacing: -2px;">Mostra Virtual de <br><span class="text-primary">Tecnologia & Ciência</span></h1>
-            <p class="lead text-muted mb-5 px-md-5">
-                Explore a criatividade acadêmica em uma plataforma projetada para dar vida às ideias da nossa comunidade.
-            </p>
-            <a href="{% url 'projetos' %}" class="btn-main shadow-lg text-decoration-none">Começar Exploração</a>
+<section class="text-center py-5" data-aos="zoom-out">
+    <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 mb-3 fw-bold">PROJETO ACADÊMICO 2026</span>
+    <h1 class="display-3 fw-800 mb-4" style="letter-spacing: -2px;">Ciência que <span class="text-primary">Transforma.</span></h1>
+    <p class="lead text-muted mb-5 mx-auto" style="max-width: 700px;">
+        Bem-vindo ao observatório digital da UFJ. Explore os projetos que estão moldando o futuro da tecnologia e da ciência em Jataí.
+    </p>
+    <div class="d-flex justify-content-center gap-3">
+        <a href="{% url 'projetos' %}" class="btn-modern shadow-lg">Explorar Repositório</a>
+        <a href="#sobre-nos" class="btn btn-outline-secondary rounded-pill px-4 fw-bold">Saiba Mais</a>
+    </div>
+</section>
+
+<div class="row g-4 py-5" data-aos="fade-up">
+    <div class="col-md-4">
+        <div class="p-4 border-0 rounded-4 bg-light text-center shadow-sm">
+            <h2 class="fw-bold text-primary mb-0">8º</h2>
+            <p class="text-muted small mb-0 fw-bold">Semestre de Computação</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4 border-0 rounded-4 bg-light text-center shadow-sm">
+            <h2 class="fw-bold text-primary mb-0">+100</h2>
+            <p class="text-muted small mb-0 fw-bold">Pesquisas Catalogadas</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4 border-0 rounded-4 bg-light text-center shadow-sm">
+            <h2 class="fw-bold text-primary mb-0">UFJ</h2>
+            <p class="text-muted small mb-0 fw-bold">Jataí, Goiás</p>
         </div>
     </div>
 </div>
 
-<div class="container my-5 pb-5">
-    <div class="row g-4 justify-content-center">
-        
-        <div class="col-md-6">
-            <a href="{% url 'projetos' %}" class="text-decoration-none">
-                <div class="p-5 bg-white rounded-5 shadow-sm border h-100 text-center custom-card-hover">
-                    <div class="icon-circle bg-primary-light mb-4 mx-auto">
-                        <i class="bi bi-book-half display-4 text-primary"></i>
-                    </div>
-                    <h3 class="fw-bold text-dark">Repositório Digital</h3>
-                    <p class="text-muted">Acesse o acervo completo de artigos, PDFs e banners das pesquisas acadêmicas.</p>
-                    <span class="btn btn-outline-primary rounded-pill px-4 mt-2 fw-bold">Explorar Biblioteca</span>
+<div class="row g-4 pt-5">
+    <div class="col-md-6" data-aos="fade-right">
+        <a href="{% url 'projetos' %}" class="text-decoration-none h-100">
+            <div class="p-5 border-0 rounded-5 bg-white h-100 shadow-sm hover-up transition">
+                <div class="icon-box bg-primary-subtle rounded-4 d-inline-block p-3 mb-4">
+                    <i class="bi bi-folder2-open fs-1 text-primary"></i>
                 </div>
-            </a>
-        </div>
-
-        <div class="col-md-6">
-            <a href="{% url 'agenda' %}" class="text-decoration-none">
-                <div class="p-5 bg-white rounded-5 shadow-sm border h-100 text-center custom-card-hover">
-                    <div class="icon-circle bg-success-light mb-4 mx-auto">
-                        <i class="bi bi-calendar-event display-4 text-success"></i>
-                    </div>
-                    <h3 class="fw-bold text-dark">Agenda de Webinários</h3>
-                    <p class="text-muted">Fique por dentro das datas de lives, defesas e eventos científicos da UFJ.</p>
-                    <span class="btn btn-outline-success rounded-pill px-4 mt-2 fw-bold">Ver Calendário</span>
+                <h3 class="fw-bold">Repositório Digital</h3>
+                <p class="text-muted">Acesso instantâneo a banners, artigos científicos e documentações técnicas completas.</p>
+                <span class="text-primary fw-bold">Ver tudo <i class="bi bi-arrow-right"></i></span>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6" data-aos="fade-left">
+        <a href="{% url 'agenda' %}" class="text-decoration-none h-100">
+            <div class="p-5 border-0 rounded-5 bg-white h-100 shadow-sm hover-up transition">
+                <div class="icon-box bg-success-subtle rounded-4 d-inline-block p-3 mb-4">
+                    <i class="bi bi-calendar3 fs-1 text-success"></i>
                 </div>
-            </a>
-        </div>
-
+                <h3 class="fw-bold">Agenda de Eventos</h3>
+                <p class="text-muted">Não perca as lives, defesas de TCC e workshops da nossa comunidade acadêmica.</p>
+                <span class="text-success fw-bold">Ver calendário <i class="bi bi-arrow-right"></i></span>
+            </div>
+        </a>
     </div>
 </div>
+
+<section id="sobre-nos" class="py-5 mt-5">
+    <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-800">Processo de Inovação</h2>
+        <p class="text-muted">Como os projetos chegam até você</p>
+    </div>
+    <div class="row g-4 text-center">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-card p-4">
+                <span class="step-number">01</span>
+                <h5 class="fw-bold mt-3">Pesquisa</h5>
+                <p class="small text-muted">Alunos e professores desenvolvem soluções para problemas reais da sociedade.</p>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-card p-4">
+                <span class="step-number">02</span>
+                <h5 class="fw-bold mt-3">Publicação</h5>
+                <p class="small text-muted">Os banners e artigos são revisados e enviados para o nosso repositório digital.</p>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="step-card p-4">
+                <span class="step-number">03</span>
+                <h5 class="fw-bold mt-3">Impacto</h5>
+                <p class="small text-muted">O conhecimento fica disponível para todos, gerando valor para a UFJ e para o mundo.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 mt-5 bg-primary rounded-5 text-white text-center" data-aos="zoom-in">
+    <div class="p-5">
+        <h2 class="fw-bold mb-3">Pronto para começar?</h2>
+        <p class="mb-4 opacity-75">Navegue pelas áreas de Tecnologia, Saúde, Educação e Humanas.</p>
+        <a href="{% url 'projetos' %}" class="btn btn-light btn-lg rounded-pill px-5 fw-bold text-primary">Acesse o Repositório</a>
+    </div>
+</section>
 
 <style>
-    .bg-primary-light { background-color: rgba(13, 110, 253, 0.1); width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-    .bg-success-light { background-color: rgba(25, 135, 84, 0.1); width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+    .fw-800 { font-weight: 800; }
+    .transition { transition: 0.4s ease; }
+    .hover-up:hover { transform: translateY(-10px); }
     
-    .custom-card-hover {
-        transition: all 0.4s ease;
-        border: 1px solid #eee !important;
+    .step-card { position: relative; }
+    .step-number { 
+        font-size: 3rem; font-weight: 800; color: rgba(37, 99, 235, 0.1); 
+        position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
     }
 
-    .custom-card-hover:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
-        border-color: #0284c7 !important;
-    }
+    /* Suaviza o scroll para links internos (#sobre-nos) */
+    html { scroll-behavior: smooth; }
 </style>
 {% endblock %}
