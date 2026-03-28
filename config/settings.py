@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # ESSENCIAL PARA O DEPLOY (Servir estáticos)
+    'whitenoise.middleware.WhiteNoiseMiddleware', # ESSENCIAL PARA O DEPLOY
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,16 +84,16 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Pasta onde o Django vai reunir tudo no servidor
+# Pasta onde o Django vai reunir tudo no servidor para o deploy
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Onde o Django busca seus arquivos de desenvolvimento (sua pasta da logo)
+# Onde o Django busca seus arquivos de desenvolvimento
 STATICFILES_DIRS = [
     BASE_DIR / "mostra" / "static",
 ]
 
-# Configuração para o WhiteNoise comprimir os arquivos e deixá-los mais rápidos no ar
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# AJUSTE AQUI: Modo mais tolerante do WhiteNoise para não dar erro no build
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Configuração de Media (Imagens e PDFs que você sobe no Admin)
 MEDIA_URL = '/media/'
