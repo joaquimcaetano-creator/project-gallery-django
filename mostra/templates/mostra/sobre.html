@@ -1,18 +1,49 @@
 {% extends 'mostra/base.html' %}
 
 {% block content %}
-<div class="py-5">
-    <h2 class="fw-bold mb-4">Sobre a Mostra Virtual</h2>
-    <div class="card p-4 shadow-sm">
-        <p class="lead">
-            Este projeto foi desenvolvido por <strong>Joaquim</strong> como parte da seleção para o OBSAM.
-        </p>
-        <p>
-            O objetivo é facilitar a visualização e busca de projetos acadêmicos, 
-            utilizando tecnologias modernas como <strong>Django 6</strong> e <strong>Bootstrap 5</strong>.
-        </p>
-        <hr>
-        <p class="text-muted small">Versão 1.0 - Março de 2026</p>
+<div class="container py-5">
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6">
+            <span class="badge bg-primary-light text-primary mb-3 px-3 py-2 rounded-pill fw-bold">SOBRE O PROJETO</span>
+            <h1 class="display-4 fw-bold mb-4">Conectando Ciência <br>e Tecnologia na UFJ</h1>
+            <p class="lead text-muted">
+                A Mostra Virtual é uma iniciativa do curso de Ciência da Computação da Universidade Federal de Jataí para dar visibilidade aos projetos de pesquisa e extensão.
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-4 bg-white shadow-sm rounded-5 border">
+                <h5 class="fw-bold mb-3"><i class="bi bi-bullseye text-primary me-2"></i> Nossa Missão</h5>
+                <p class="text-muted">Transformar o conhecimento acadêmico em conteúdo acessível, permitindo que a comunidade explore as inovações produzidas dentro da universidade de forma digital e interativa.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 text-center">
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded-4 h-100">
+                <i class="bi bi-cpu display-5 text-primary mb-3"></i>
+                <h5 class="fw-bold">Tecnologia</h5>
+                <p class="small text-muted">Desenvolvido com Python/Django, focado em performance e segurança de dados.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded-4 h-100">
+                <i class="bi bi-people display-5 text-primary mb-3"></i>
+                <h5 class="fw-bold">Colaboração</h5>
+                <p class="small text-muted">Um espaço aberto para alunos e professores compartilharem suas descobertas.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded-4 h-100">
+                <i class="bi bi-globe display-5 text-primary mb-3"></i>
+                <h5 class="fw-bold">Acesso Livre</h5>
+                <p class="small text-muted">Todo o acervo de banners e artigos disponível para download gratuito.</p>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .bg-primary-light { background-color: rgba(13, 110, 253, 0.1); }
+</style>
 {% endblock %}
