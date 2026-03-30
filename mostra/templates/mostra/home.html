@@ -92,7 +92,7 @@
 </section>
 
 <section class="py-5 mt-5 bg-primary rounded-5 text-white text-center" data-aos="zoom-in">
-    <div class="p-5">
+    <div class="p-5 section-ready">
         <h2 class="fw-bold mb-3">Pronto para começar?</h2>
         <p class="mb-4 opacity-75">Navegue pelas áreas de Tecnologia, Saúde, Educação e Humanas.</p>
         <a href="{% url 'projetos' %}" class="btn btn-light btn-lg rounded-pill px-5 fw-bold text-primary">Acesse o Repositório</a>
@@ -100,6 +100,13 @@
 </section>
 
 <style>
+    /* 1. Mudar apenas os textos da seção azul para branco */
+    .bg-primary h2, 
+    .bg-primary p {
+        color: #ffffff !important;
+    }
+
+    /* 2. Mantendo seus estilos originais */
     .fw-800 { font-weight: 800; }
     .transition { transition: 0.4s ease; }
     .hover-up:hover { transform: translateY(-10px); }
@@ -110,7 +117,6 @@
         position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
     }
 
-    /* Suaviza o scroll para links internos (#sobre-nos) */
     html { scroll-behavior: smooth; }
 </style>
 {% endblock %}

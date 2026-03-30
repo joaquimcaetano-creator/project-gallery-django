@@ -1,0 +1,85 @@
+/* ==========================================================================
+   1. NAVBAR MOBILE (O "Pulo do Gato" para visibilidade total)
+   ========================================================================== */
+
+@media (max-width: 991px) {
+    /* Esconde o hambúrguer */
+    .navbar-toggler {
+        display: none !important;
+    }
+
+    /* Força o menu a ficar visível e horizontal */
+    .collapse.navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .navbar-nav {
+        flex-direction: row !important;
+        display: flex !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        width: 100% !important;
+        padding: 10px 5px !important;
+        /* Esconde a barra de rolagem */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; 
+    }
+
+    .navbar-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* COR DOS LINKS: Branco Puro para brilhar no fundo escuro */
+    .navbar-nav .nav-link {
+        color: #ffffff !important; /* Branco total */
+        padding: 8px 15px !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        opacity: 0.9;
+    }
+
+    /* Item ativo ou quando toca */
+    .navbar-nav .nav-link:active, 
+    .navbar-nav .nav-link.active {
+        opacity: 1;
+        color: #2563eb !important; /* Um azul vibrante só para dar um destaque no clique */
+    }
+}
+
+/* ==========================================================================
+   2. AJUSTES DE CONTRASTE (O que você pediu: Branco na seção azul)
+   ========================================================================== */
+
+/* Força o branco na seção "Pronto para começar" */
+.bg-primary h2, 
+.bg-primary p {
+    color: #ffffff !important;
+}
+
+/* Garante que o container principal não aperte o conteúdo no celular */
+@media (max-width: 768px) {
+    .glass-container {
+        padding: 20px 15px !important;
+        margin-top: 10px !important;
+    }
+}
+
+/* ==========================================================================
+   3. PERFECCIONISMO (Bordas e Sombras)
+   ========================================================================== */
+
+/* Suaviza as bordas dos cards brancos da Home */
+.bg-white.rounded-5 {
+    border: 1px solid rgba(0,0,0,0.05) !important;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1) !important;
+}
+
+/* Scrollbar do PC mais fina */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
