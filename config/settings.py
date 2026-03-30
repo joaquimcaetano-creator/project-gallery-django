@@ -4,7 +4,7 @@ Django settings for config project.
 
 from pathlib import Path
 import os
-import dj_database_url # <--- IMPORTANTE: Adicionamos essa biblioteca para o banco real
+import dj_database_url # Biblioteca para o banco real no Render
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,23 +15,29 @@ SECRET_KEY = 'django-insecure-x9k8^lkmkaom**76(ae@1i@!2#1vwxuw*aum6n3d*32vb)q-px
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# No deploy, permitimos o endereço que o Render vai nos dar
+# Permitimos o endereço que o Render vai nos dar
 ALLOWED_HOSTS = ['*']
 
-# Application definition
+# ==============================================================================
+# 1. APPS INSTALADOS 
+# ==============================================================================
 INSTALLED_APPS = [
+    'jazzmin',  
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mostra',
+    'mostra', # seu app
 ]
 
+# ==============================================================================
+# 2. MIDDLEWARE (Configurado para Deploy/WhiteNoise)
+# ==============================================================================
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # ESSENCIAL PARA O DEPLOY
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,8 +65,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# --- BANCO DE DADOS (CONFIGURAÇÃO HÍBRIDA) ---
-# Ele busca a variável DATABASE_URL no Render. Se não achar, usa o SQLite.
+# ==============================================================================
+# 3. BANCO DE DADOS (Configuração Híbrida para Deploy)
+# ==============================================================================
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
@@ -68,7 +75,7 @@ DATABASES = {
     )
 }
 
-# Password validation
+# Validação de Senhas
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
@@ -76,29 +83,61 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
-# Internationalization
+# Internacionalização (Brasil)
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
-# --- ARQUIVOS ESTÁTICOS E MÍDIA ---
-
+# ==============================================================================
+# 4. ARQUIVOS ESTÁTICOS E MÍDIA
+# ==============================================================================
 STATIC_URL = 'static/'
-
-# Pasta onde o Django vai reunir tudo no servidor para o deploy
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# Onde o Django busca seus arquivos de desenvolvimento
 STATICFILES_DIRS = [
     BASE_DIR / "mostra" / "static",
 ]
-
-# Modo mais tolerante do WhiteNoise para não dar erro no build
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-# Configuração de Media (Imagens e PDFs que você sobe no Admin)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ==============================================================================
+# 5. CONFIGURAÇÃO JAZZMIN 
+# ==============================================================================
+JAZZMIN_SETTINGS = {
+    "site_title": "Portal de Gestão - Mostra UFJ",
+    "site_header": "Mostra UFJ",
+    "site_brand": "Computação - UFJ",
+    
+  
+    "site_logo": "mostra/img/logo_ufj_branca.png", 
+    "login_logo": "mostra/img/logo_ufj_branca.png", 
+    
+    "site_icon": "mostra/img/logo_ufj_branca.png",
+    "welcome_sign": "Bem-vindo ao Portal de Gestão da Mostra UFJ",
+    "copyright": "UFJ - Ciência da Computação © 2026",
+    
+    "user_avatar": None,
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "mostra.Projeto": "fas fa-project-diagram",
+        "mostra.Pesquisa": "fas fa-flask",
+    },
+}
+
+# Ajustes de Cores para forçar o AZUL e estilo moderno
+JAZZMIN_UI_TWEAKS = {
+    "navbar_variant": "navbar-dark",
+    "theme": "flatly",        # Tema azul profissional
+    "dark_mode_theme": None,
+    "navbar": "navbar-primary",
+    "brand_variant": "navbar-primary",
+    "accent": "accent-primary",
+}

@@ -7,7 +7,7 @@ from .models import Projeto, Evento, LinhaPesquisa
 def home(request):
     return render(request, 'mostra/home.html')
 
-# --- REPOSITÓRIO DE PROJETOS (COM BUSCA) ---
+# --- REPOSITÓRIO DE PROJETOS ---
 def projetos(request):
     termo_busca = request.GET.get('busca')
     if termo_busca:
