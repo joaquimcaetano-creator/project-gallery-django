@@ -42,4 +42,4 @@ Durante o desenvolvimento, focamos em resolver desafios reais de usabilidade:
 1. **Clone o repositório:**
    ```bash
    git clone [https://github.com/joaquimcaetano-creator/project-gallery-django]
-   cd selecao_obsam
+   cd mostra-virtual-ufj 
